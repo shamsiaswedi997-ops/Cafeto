@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cafeto LLC — Coffee & Colombian Kitchen | Cheyenne, WY</title>
+<meta name="description" content="Cafeto LLC — small-batch specialty coffee and a Colombian-inspired kitchen in Cheyenne, Wyoming. Reserve a table or explore our menu." />
+
+<!-- ============================================================
+     FAVICON & APP ICONS
+     ============================================================ -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23150e0c'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Georgia,serif'%20font-size='42'%20font-weight='700'%20fill='%23d9a94c'%20text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#150e0c">
+<meta name="msapplication-TileColor" content="#150e0c">
+
+<!-- Social share preview -->
+<meta property="og:title" content="Cafeto LLC — Coffee & Colombian Kitchen">
+<meta property="og:description" content="Small-batch specialty coffee and a Colombian-inspired kitchen in Cheyenne, Wyoming.">
+<meta property="og:image" content="/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --espresso:#150e0c;
+  --roast:#211613;
+  --roast-2:#2c1e19;
+  --cream:#f7f1e8;
+  --cream-dim:#d9cfc2;
+  --gold:#d9a94c;
+  --gold-soft:#f0cd8c;
+  --terracotta:#b9552f;
+  --line:rgba(217,169,76,.22);
+
+  --font-display:'Playfair Display', Georgia, serif;
+  --font-body:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius:18px;
+  --radius-sm:12px;
+  --shadow:0 24px 60px -20px rgba(0,0,0,.75);
+  --max:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-weight:300;
+  color:var(--cream);
+  background:var(--espresso);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* subtle warm glow across the page */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(185,85,47,.18), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(217,169,76,.10), transparent 60%);
+  z-index:0;
+}
+img{max-width:100%;display:block;}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.15;margin:0;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;}
+::selection{background:var(--gold);color:var(--espresso);}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:24px;}
+
+/* ============================================================
+   3. ICON SYSTEM  (sprite-driven)
+   ============================================================ */
+.icon{
+  display:inline-block;
+  flex:none;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vertical-align:middle;
+}
+/* solid variant (e.g. star rating) */
+.icon--solid{fill:currentColor;stroke:none;}
+/* button icon nudge */
+.btn .icon{margin-left:2px;transition:transform .3s var(--ease);}
+.btn:hover .icon{transform:translateX(3px);}
+/* hero rating star */
+.hero__facts .icon{margin-left:6px;vertical-align:0;}
+
+/* ============================================================
+   4. HEADER + NAV TABS
+   ============================================================ */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(21,14,12,.82);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid rgba(217,169,76,.14);
+}
+.site-header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  min-height:76px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand__mark{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,var(--gold),#a87a26);
+  color:var(--espresso);
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  font-weight:700;
+  box-shadow:0 6px 18px -6px rgba(217,169,76,.8);
+}
+.brand__name{
+  font-family:var(--font-display);
+  font-size:1.3rem;
+  letter-spacing:.02em;
+  line-height:1;
+}
+.brand__sub{
+  display:block;
+  font-family:var(--font-body);
+  font-size:.62rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:5px;
+}
+
+.nav{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav__link{
+  position:relative;
+  padding:10px 16px;
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--cream-dim);
+  border-radius:999px;
+  white-space:nowrap;
+  transition:color .3s var(--ease), background .3s var(--ease);
+}
+.nav__link:hover{color:var(--cream);background:rgba(217,169,76,.08);}
+.nav__link.is-active{
+  color:var(--espresso);
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+  box-shadow:0 8px 22px -10px rgba(217,169,76,.9);
+}
+.header__phone{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.82rem;font-weight:500;letter-spacing:.06em;
+  color:var(--gold-soft);
+  border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;
+  transition:.3s var(--ease);
+}
+.header__phone:hover{background:rgba(217,169,76,.12);border-color:var(--gold);}
+
+/* ============================================================
+   5. TAB PANELS
+   ============================================================ */
+main{position:relative;z-index:1;}
+.tab-panel{display:none;}
+.tab-panel.is-active{display:block;animation:panelIn .55s var(--ease) both;}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:none;}
+}
+
+/* ============================================================
+   6. SHARED PIECES
+   ============================================================ */
+.eyebrow{
+  font-size:.7rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+  margin-bottom:18px;
+}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(2rem,4.2vw,3rem);}
+.section-head p{margin-top:16px;color:var(--cream-dim);font-size:1.02rem;}
+.divider{
+  width:64px;height:2px;margin-top:22px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 32px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+}
+.btn--primary{
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+  color:var(--espresso);
+  box-shadow:0 18px 40px -18px rgba(217,169,76,.95);
+}
+.btn--primary:hover{transform:translateY(-3px);box-shadow:0 24px 48px -18px rgba(217,169,76,1);}
+.btn--ghost{
+  border:1px solid rgba(247,241,232,.32);
+  color:var(--cream);
+}
+.btn--ghost:hover{border-color:var(--gold);color:var(--gold-soft);transform:translateY(-3px);}
+
+/* ============================================================
+   7. HOME / HERO
+   ============================================================ */
+.hero{position:relative;min-height:calc(100vh - 76px);display:flex;align-items:center;overflow:hidden;}
+.hero__media{
+  position:absolute;inset:0;
+  background:#241713 url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+  transform:scale(1.04);
+}
+.hero__media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(100deg, rgba(21,14,12,.96) 0%, rgba(21,14,12,.78) 45%, rgba(21,14,12,.32) 100%),
+    linear-gradient(to top, var(--espresso) 2%, transparent 45%);
+}
+.hero__content{position:relative;padding-block:110px;max-width:720px;}
+.hero h1{
+  font-size:clamp(2.6rem,6.4vw,4.6rem);
+  letter-spacing:-.015em;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--gold-soft);
+  display:inline-block;
+}
+.hero .lead{
+  margin-top:26px;
+  font-size:1.08rem;
+  color:var(--cream-dim);
+  max-width:520px;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:42px;}
+.hero__facts{
+  list-style:none;margin:64px 0 0;padding:0;
+  display:flex;flex-wrap:wrap;gap:14px 46px;
+  border-top:1px solid rgba(247,241,232,.14);
+  padding-top:26px;
+}
+.hero__facts li{display:flex;flex-direction:column;}
+.hero__facts strong{
+  font-family:var(--font-display);
+  font-size:1.5rem;color:var(--gold-soft);font-weight:600;
+}
+.hero__facts span{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);
+}
+
+/* ============================================================
+   8. MENU
+   ============================================================ */
+.page{padding-block:96px 110px;}
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:34px;
+}
+.menu-card{
+  position:relative;
+  padding:38px 34px;
+  border-radius:var(--radius);
+  background:linear-gradient(160deg, rgba(44,30,25,.92), rgba(28,19,16,.92));
+  border:1px solid rgba(217,169,76,.16);
+  transition:transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+.menu-card:hover{transform:translateY(-6px);border-color:rgba(217,169,76,.45);box-shadow:var(--shadow);}
+.menu-card__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:26px;}
+.menu-card h3{font-size:1.5rem;}
+.menu-card__tag{
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--line);
+  padding:5px 12px;border-radius:999px;white-space:nowrap;
+}
+.menu-item{display:flex;gap:16px;align-items:flex-start;padding:15px 0;border-bottom:1px dashed rgba(247,241,232,.10);}
+.menu-item:last-child{border-bottom:0;padding-bottom:0;}
+.menu-item__info{flex:1;}
+.menu-item__name{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  display:flex;align-items:center;gap:10px;
+}
+.menu-item__name .dot{color:var(--terracotta);font-size:.55rem;}
+.menu-item__desc{font-size:.85rem;color:var(--cream-dim);margin-top:4px;}
+.menu-item__price{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  color:var(--gold-soft);
+  white-space:nowrap;
+  padding-top:2px;
+}
+.menu-note{
+  margin-top:52px;
+  padding:26px 32px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--line);
+  background:rgba(217,169,76,.05);
+  font-size:.9rem;
+  color:var(--cream-dim);
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+}
+.menu-note strong{color:var(--gold-soft);font-weight:500;}
+
+/* ============================================================
+   9. ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:64px;
+  align-items:center;
+}
+.about-media{position:relative;}
+.about-media img{
+  width:100%;height:520px;object-fit:cover;
+  border-radius:var(--radius);
+  border:1px solid rgba(217,169,76,.2);
+}
+.about-media::after{
+  content:"";position:absolute;inset:16px -16px -16px 16px;
+  border:1px solid rgba(217,169,76,.35);
+  border-radius:var(--radius);
+  z-index:-1;
+}
+.about-text p{color:var(--cream-dim);margin-top:18px;}
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-top:44px;
+  border-top:1px solid rgba(247,241,232,.14);
+  padding-top:30px;
+}
+.stats strong{
+  display:block;font-family:var(--font-display);
+  font-size:1.9rem;color:var(--gold-soft);
+}
+.stats span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);}
+.values{list-style:none;padding:0;margin:34px 0 0;display:grid;gap:14px;}
+.values li{display:flex;gap:14px;align-items:flex-start;color:var(--cream-dim);font-size:.95rem;}
+.values li::before{
+  content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-soft),var(--terracotta));
+}
+
+/* ============================================================
+   10. GALLERY
+   ============================================================ */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:190px;
+  gap:16px;
+}
+.gallery figure{
+  margin:0;position:relative;overflow:hidden;
+  border-radius:var(--radius-sm);
+  background:#241713;
+  border:1px solid rgba(217,169,76,.14);
+}
+.gallery img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s var(--ease), filter .5s var(--ease);
+  filter:saturate(.92);
+}
+.gallery figure:hover img{transform:scale(1.08);filter:saturate(1.05);}
+.gallery figcaption{
+  position:absolute;inset:auto 0 0 0;
+  padding:22px 18px 16px;
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cream);
+  background:linear-gradient(to top, rgba(21,14,12,.92), transparent);
+  opacity:0;transform:translateY(8px);
+  transition:.4s var(--ease);
+}
+.gallery figure:hover figcaption{opacity:1;transform:none;}
+.g-tall{grid-row:span 2;}
+.g-wide{grid-column:span 2;}
+
+/* ============================================================
+   11. CONTACT
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:start;}
+.info-list{list-style:none;padding:0;margin:38px 0 0;display:grid;gap:26px;}
+.info-list li{display:flex;gap:18px;align-items:flex-start;}
+.info-icon{
+  flex:none;width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line);
+  background:rgba(217,169,76,.07);
+  color:var(--gold-soft);
+  transition:background .3s var(--ease), border-color .3s var(--ease);
+}
+.info-list li:hover .info-icon{background:rgba(217,169,76,.16);border-color:var(--gold);}
+.info-list h4{
+  font-family:var(--font-body);
+  font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:6px;
+}
+.info-list a,.info-list p{color:var(--cream-dim);font-size:.98rem;transition:color .3s;}
+.info-list a:hover{color:var(--gold-soft);}
+
+.form-card{
+  padding:42px 38px;
+  border-radius:var(--radius);
+  background:linear-gradient(160deg, rgba(44,30,25,.92), rgba(28,19,16,.92));
+  border:1px solid rgba(217,169,76,.18);
+  box-shadow:var(--shadow);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.field label{
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cream-dim);font-weight:500;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  padding:14px 16px;
+  font-family:inherit;font-size:.94rem;font-weight:300;
+  color:var(--cream);
+  background:rgba(21,14,12,.72);
+  border:1px solid rgba(247,241,232,.13);
+  border-radius:var(--radius-sm);
+  outline:none;
+  transition:border-color .3s var(--ease), background .3s var(--ease), box-shadow .3s var(--ease);
+}
+.field textarea{resize:vertical;min-height:120px;}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--gold);
+  background:rgba(21,14,12,.95);
+  box-shadow:0 0 0 4px rgba(217,169,76,.10);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(217,207,194,.4);}
+.form-card .btn{width:100%;margin-top:6px;}
+.form-note{font-size:.74rem;color:rgba(217,207,194,.6);margin-top:16px;text-align:center;}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+.site-footer{
+  position:relative;z-index:1;
+  border-top:1px solid rgba(217,169,76,.14);
+  padding-block:46px;
+  background:rgba(13,9,8,.6);
+}
+/* ===== Header icon image ===== */
+.brand__mark{
+  background:none;          /* remove the gold gradient — your icon provides it */
+  box-shadow:none;          /* remove the gold glow */
+  padding:0;
+  overflow:hidden;          /* keeps the image inside the circle */
+  border-radius:50%;        /* keep circular — or change to 8px for rounded square */
+}
+.brand__mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;         /* fills the circle without stretching */
+  display:block;
+}
+
+
+.footer-inner{
+  display:flex;flex-wrap:wrap;gap:24px;
+  align-items:center;justify-content:space-between;
+  font-size:.8rem;color:rgba(217,207,194,.6);
+}
+.footer-inner a:hover{color:var(--gold-soft);}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+.footer-links a{display:inline-flex;align-items:center;gap:7px;}
+
+/* ============================================================
+   13. RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px;}
+  .about-media img{height:420px;}
+  .gallery{grid-template-columns:repeat(2,1fr);}
+  .header__phone{display:none;}
+}
+@media (max-width:820px){
+  .site-header__inner{flex-direction:column;align-items:flex-start;gap:10px;padding-block:14px;min-height:0;}
+  .nav{width:100%;padding-bottom:4px;}
+  .hero{min-height:auto;}
+  .hero__content{padding-block:80px;}
+  .hero__facts{gap:18px 32px;}
+  .page{padding-block:72px 88px;}
+  .menu-grid{grid-template-columns:1fr;}
+}
+@media (max-width:560px){
+  .wrap{padding-inline:18px;}
+  .form-row{grid-template-columns:1fr;}
+  .form-card{padding:30px 22px;}
+  .menu-card{padding:30px 22px;}
+  .gallery{grid-template-columns:1fr;grid-auto-rows:200px;}
+  .g-wide{grid-column:span 1;}
+  .g-tall{grid-row:span 1;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .btn{padding:14px 24px;font-size:.72rem;}
+  .footer-inner{flex-direction:column;text-align:center;}
+  .footer-links{justify-content:center;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     SVG ICON SPRITE  (hidden — reference with <use href="#icon-name">)
+     ============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <symbol id="icon-phone" viewBox="0 0 24 24">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </symbol>
+
+  <symbol id="icon-map-pin" viewBox="0 0 24 24">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+  </symbol>
+
+  <symbol id="icon-mail" viewBox="0 0 24 24">
+    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>
+  </symbol>
+
+  <symbol id="icon-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+  </symbol>
+
+  <symbol id="icon-cup" viewBox="0 0 24 24">
+    <path d="M4 8h12v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M16 9h2a3 3 0 0 1 0 6h-2"/>
+  </symbol>
+
+  <symbol id="icon-bean" viewBox="0 0 24 24">
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M9 5c3 3 3 11 0 14"/>
+  </symbol>
+
+  <symbol id="icon-star" viewBox="0 0 24 24">
+    <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/>
+  </symbol>
+
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+  </symbol>
+</svg>
+
+<!-- ================= HEADER / TABS ================= -->
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a href="#home" class="brand" data-tab="home" aria-label="Cafeto LLC home">
+      <span class="brand__mark">
+  <img src="cafeto-icon.png" alt="Cafeto" width="42" height="42">
+</span>
+      <span>
+        <span class="brand__name">Cafeto</span>
+        <span class="brand__sub">Coffee &amp; Kitchen</span>
+      </span>
+    </a>
+
+    <nav class="nav" role="tablist" aria-label="Main navigation">
+      <button class="nav__link is-active" role="tab" data-tab="home"    aria-selected="true"  aria-controls="home">Home</button>
+      <button class="nav__link"           role="tab" data-tab="menu"    aria-selected="false" aria-controls="menu">Menu</button>
+      <button class="nav__link"           role="tab" data-tab="about"   aria-selected="false" aria-controls="about">About</button>
+      <button class="nav__link"           role="tab" data-tab="gallery" aria-selected="false" aria-controls="gallery">Gallery</button>
+      <button class="nav__link"           role="tab" data-tab="contact" aria-selected="false" aria-controls="contact">Contact</button>
+    </nav>
+
+    <a class="header__phone" href="tel:+15315870758">
+      <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-phone"></use></svg>
+      (531) 587-0758
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= 1. HOME ================= -->
+  <section id="home" class="tab-panel is-active" role="tabpanel" aria-labelledby="home">
+    <div class="hero">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="wrap hero__content">
+        <p class="eyebrow">Cheyenne, Wyoming</p>
+        <h1>Where coffee meets<br><em>Colombian soul</em></h1>
+        <p class="lead">
+          Small-batch roasted beans, a slow-bar espresso program, and a kitchen rooted in
+          family recipes from the Andes. Welcome to Cafeto — your table is waiting.
+        </p>
+        <div class="hero__actions">
+          <button class="btn btn--primary" data-tab="menu">
+            Explore the menu
+            <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </button>
+          <button class="btn btn--ghost" data-tab="contact">Reserve a table</button>
+        </div>
+        <ul class="hero__facts">
+          <li><strong>12+</strong><span>Origins roasted</span></li>
+          <li><strong>Daily</strong><span>Fresh pastries</span></li>
+          <li>
+            <strong>4.9<svg class="icon icon--solid" width="15" height="15" aria-hidden="true"><use href="#icon-star"></use></svg></strong>
+            <span>Guest rating</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. MENU ================= -->
+  <section id="menu" class="tab-panel page" role="tabpanel" aria-labelledby="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our Menu</p>
+        <h2>Roasted here. Cooked from memory.</h2>
+        <p>Every cup is pulled to order and every plate is built from scratch each morning. Ask your server about today's single origin.</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="menu-grid">
+
+        <!-- Coffee -->
+        <article class="menu-card">
+          <div class="menu-card__head">
+            <h3>Coffee &amp; Espresso</h3>
+            <span class="menu-card__tag">All day</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Espresso <span class="dot">●</span></div>
+              <p class="menu-item__desc">Double shot, single origin, pulled on the La Marzocco.</p>
+            </div>
+            <span class="menu-item__price">$3.50</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Cortado</div>
+              <p class="menu-item__desc">Equal parts espresso and silky steamed milk.</p>
+            </div>
+            <span class="menu-item__price">$4.25</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Latte <span class="dot">●</span></div>
+              <p class="menu-item__desc">House blend, oat or whole milk, free-pour art.</p>
+            </div>
+            <span class="menu-item__price">$5.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Pourover</div>
+              <p class="menu-item__desc">Hand-brewed V60 — ask for today's rotating origin.</p>
+            </div>
+            <span class="menu-item__price">$4.75</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Cold Brew</div>
+              <p class="menu-item__desc">18-hour steep, served over a single clear ice cube.</p>
+            </div>
+            <span class="menu-item__price">$4.50</span>
+          </div>
+        </article>
+
+        <!-- Breakfast -->
+        <article class="menu-card">
+          <div class="menu-card__head">
+            <h3>Breakfast</h3>
+            <span class="menu-card__tag">Till 11:30</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Calentado <span class="dot">●</span></div>
+              <p class="menu-item__desc">Rice &amp; beans, two eggs, arepa, and hogao sauce.</p>
+            </div>
+            <span class="menu-item__price">$12.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Arepa de Queso</div>
+              <p class="menu-item__desc">Griddled white corn arepa, melted queso fresco.</p>
+            </div>
+            <span class="menu-item__price">$8.50</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Tostadas &amp; Café</div>
+              <p class="menu-item__desc">Sourdough, butter, house blackberry jam, espresso.</p>
+            </div>
+            <span class="menu-item__price">$9.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Avocado Toast</div>
+              <p class="menu-item__desc">Smashed avocado, lime, chili, pickled onion, egg.</p>
+            </div>
+            <span class="menu-item__price">$11.50</span>
+          </div>
+        </article>
+
+        <!-- Mains -->
+        <article class="menu-card">
+          <div class="menu-card__head">
+            <h3>Kitchen Plates</h3>
+            <span class="menu-card__tag">Lunch &amp; Dinner</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Bandeja Paisa <span class="dot">●</span></div>
+              <p class="menu-item__desc">Beans, rice, chicharrón, chorizo, plantain, egg.</p>
+            </div>
+            <span class="menu-item__price">$19.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Churrasco</div>
+              <p class="menu-item__desc">Grilled skirt steak, chimichurri, yuca, house salad.</p>
+            </div>
+            <span class="menu-item__price">$24.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Cazuela Bowl</div>
+              <p class="menu-item__desc">Plantain, beef, corn, avocado, cilantro broth.</p>
+            </div>
+            <span class="menu-item__price">$16.50</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Pollo a la Plancha</div>
+              <p class="menu-item__desc">Marinated chicken, coconut rice, sweet plantain.</p>
+            </div>
+            <span class="menu-item__price">$17.00</span>
+          </div>
+        </article>
+
+        <!-- Sweets -->
+        <article class="menu-card">
+          <div class="menu-card__head">
+            <h3>Bakery &amp; Sweets</h3>
+            <span class="menu-card__tag">Baked daily</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Almojábana</div>
+              <p class="menu-item__desc">Warm cheese bread, best with a cortado.</p>
+            </div>
+            <span class="menu-item__price">$4.00</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Tres Leches <span class="dot">●</span></div>
+              <p class="menu-item__desc">Soaked sponge, vanilla cream, torched meringue.</p>
+            </div>
+            <span class="menu-item__price">$7.50</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Croissant</div>
+              <p class="menu-item__desc">72-hour laminated butter croissant.</p>
+            </div>
+            <span class="menu-item__price">$4.75</span>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item__info">
+              <div class="menu-item__name">Chocolate Brownie</div>
+              <p class="menu-item__desc">Dark chocolate, sea salt, espresso glaze.</p>
+            </div>
+            <span class="menu-item__price">$5.50</span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="menu-note">
+        <svg class="icon" width="20" height="20" style="color:var(--gold-soft)" aria-hidden="true"><use href="#icon-cup"></use></svg>
+        <strong>Good to know —</strong>
+        Oat, almond and whole milk always available. Ask us about vegan and gluten-free swaps.
+        Catering and wholesale bean orders: <a href="mailto:Contact@cafeto.rest">Contact@cafeto.rest</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. ABOUT ================= -->
+  <section id="about" class="tab-panel page" role="tabpanel" aria-labelledby="about">
+    <div class="wrap about-grid">
+      <div class="about-media">
+        <img
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80"
+          alt="The warm interior of Cafeto coffee house" loading="lazy" />
+      </div>
+
+      <div class="about-text">
+        <p class="eyebrow">Our Story</p>
+        <h2>From a family kitchen to your table.</h2>
+        <div class="divider"></div>
+
+        <p>
+          Cafeto began with a simple idea: the coffee we grew up drinking deserves the same
+          care as the food we grew up eating. We source green beans directly from smallholder
+          farms, roast them in small batches, and brew them the way our grandmothers insisted —
+          slowly, and with attention.
+        </p>
+        <p>
+          The kitchen follows the same rule. Arepas are pressed by hand each morning, hogao
+          simmers for hours, and nothing leaves the pass that we wouldn't serve at our own table.
+        </p>
+
+        <ul class="values">
+          <li>Direct-trade beans, roasted in-house every week.</li>
+          <li>Family recipes carried from Colombia, unchanged.</li>
+          <li>A room built for lingering — no rush, ever.</li>
+        </ul>
+
+        <div class="stats">
+          <div><strong>12+</strong><span>Coffee origins</span></div>
+          <div><strong>100%</strong><span>Made from scratch</span></div>
+          <div><strong>7</strong><span>Days a week</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. GALLERY ================= -->
+  <section id="gallery" class="tab-panel page" role="tabpanel" aria-labelledby="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Gallery</p>
+        <h2>A look inside Cafeto.</h2>
+        <p>Morning light, steam on the bar, and plates straight from the pass.</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="gallery">
+        <figure class="g-tall">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80" alt="Barista pouring latte art" loading="lazy">
+          <figcaption>The bar</figcaption>
+        </figure>
+        <figure class="g-wide">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80" alt="Plated house dish" loading="lazy">
+          <figcaption>From the kitchen</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=80" alt="Freshly roasted coffee beans" loading="lazy">
+          <figcaption>Small-batch roast</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80" alt="Fresh baked pastries" loading="lazy">
+          <figcaption>Baked at dawn</figcaption>
+        </figure>
+        <figure class="g-wide">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1200&q=80" alt="Espresso being pulled" loading="lazy">
+          <figcaption>Pulled to order</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Cup of coffee on a table" loading="lazy">
+          <figcaption>Slow mornings</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. CONTACT ================= -->
+  <section id="contact" class="tab-panel page" role="tabpanel" aria-labelledby="contact">
+    <div class="wrap contact-grid">
+
+      <div>
+        <p class="eyebrow">Visit / Reserve</p>
+        <h2>Come sit with us.</h2>
+        <div class="divider"></div>
+        <p style="margin-top:18px;color:var(--cream-dim);">
+          Walk-ins are always welcome. For groups of six or more, reservations, catering
+          or wholesale coffee, drop us a line and we'll reply within one business day.
+        </p>
+
+        <ul class="info-list">
+          <li>
+            <span class="info-icon" aria-hidden="true">
+              <svg class="icon" width="18" height="18"><use href="#icon-map-pin"></use></svg>
+            </span>
+            <div>
+              <h4>Address</h4>
+              <p>1621 Central Ave<br>Cheyenne, WY 82001, United States</p>
+            </div>
+          </li>
+          <li>
+            <span class="info-icon" aria-hidden="true">
+              <svg class="icon" width="18" height="18"><use href="#icon-phone"></use></svg>
+            </span>
+            <div>
+              <h4>Phone</h4>
+              <a href="tel:+15315870758">+1 (531) 587-0758</a>
+            </div>
+          </li>
+          <li>
+            <span class="info-icon" aria-hidden="true">
+              <svg class="icon" width="18" height="18"><use href="#icon-mail"></use></svg>
+            </span>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:Contact@cafeto.rest">Contact@cafeto.rest</a>
+            </div>
+          </li>
+          <li>
+            <span class="info-icon" aria-hidden="true">
+              <svg class="icon" width="18" height="18"><use href="#icon-clock"></use></svg>
+            </span>
+            <div>
+              <h4>Hours</h4>
+              <p>Mon – Fri · 7:00 – 21:00<br>Sat – Sun · 8:00 – 22:00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <h3 style="font-size:1.45rem;margin-bottom:8px;">Send us a message</h3>
+        <p style="font-size:.88rem;color:var(--cream-dim);margin-bottom:26px;">
+          Reservations, catering, wholesale beans — tell us what you need.
+        </p>
+
+        <form action="#" method="post">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="jane@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="(531) 000-0000">
+            </div>
+            <div class="field">
+              <label for="topic">I'm writing about</label>
+              <select id="topic" name="topic">
+                <option>Table reservation</option>
+                <option>Catering / events</option>
+                <option>Wholesale coffee</option>
+                <option>Something else</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us the date, time and number of guests…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary">
+            Send message
+            <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </button>
+          <p class="form-note">We reply within one business day.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© <span id="year"></span> Cafeto LLC · 1621 Central Ave, Cheyenne, WY 82001</p>
+    <div class="footer-links">
+      <a href="mailto:Contact@cafeto.rest">
+        <svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-mail"></use></svg>
+        Contact@cafeto.rest
+      </a>
+      <a href="tel:+15315870758">
+        <svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-phone"></use></svg>
+        +1 (531) 587-0758
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Tab switching ---------- */
+const triggers = document.querySelectorAll('[data-tab]');
+const panels   = document.querySelectorAll('.tab-panel');
+const navLinks = document.querySelectorAll('.nav__link');
+
+function activate(id, pushHash = true) {
+  panels.forEach(p => p.classList.toggle('is-active', p.id === id));
+  navLinks.forEach(link => {
+    const on = link.dataset.tab === id;
+    link.classList.toggle('is-active', on);
+    link.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+  if (pushHash && history.replaceState) {
+    history.replaceState(null, '', '#' + id);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+triggers.forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    activate(el.dataset.tab);
+  });
+});
+
+/* ---------- Deep link support (#menu etc.) ---------- */
+const initial = location.hash.replace('#', '');
+if (initial && document.getElementById(initial)?.classList.contains('tab-panel')) {
+  activate(initial, false);
+}
+
+/* ---------- Footer year ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
